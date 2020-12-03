@@ -40,6 +40,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework_simplejwt.token_blacklist',
     'sendgrid',
     'tinymce',
     'rest_framework.authtoken',
