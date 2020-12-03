@@ -7,7 +7,8 @@ from rest_framework import viewsets,status,generics
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import TokenError
 from rest_framework.permissions import IsAuthenticated
-from .serializer import HoodSerializer,AdminSerializer,ResidentsSerializer,BusinessSerializer
+from .serializer import *
+from .permissions import IsAdminOrReadOnly
 # Create your views here.
 
 
@@ -46,9 +47,9 @@ class AdminProfileList(APIView):
 #         return Response(serializers.data)
 
 
-# class UserViewSet(viewsets.ModelViewSet):
-#     """
-#     A viewset for viewing and editing user instances.
-#     """
-#     serializer_class = UserSignupSerializer
-#     queryset = User.objects.all()
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    A viewset for viewing and editing user instances.
+    """
+    serializer_class = UserSignupSerializer
+    queryset = User.objects.all()

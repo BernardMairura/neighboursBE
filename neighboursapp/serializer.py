@@ -9,7 +9,7 @@ class AdminSerializer(serializers.ModelSerializer):
 
 class HoodSerializer(serializers.ModelSerializer):
     class Meta:
-        model = NeighbourHood
+        model = Neighborhood
         fields = ('name', 'location', 'admin','hoodphoto','body','residents','emergency_contact')
 
 class ResidentsSerializer(serializers.ModelSerializer):
