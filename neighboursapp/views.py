@@ -11,7 +11,7 @@ from .serializer import HoodSerializer,AdminSerializer,ResidentsSerializer,Busin
 # Create your views here.
 
 
-class ProfileList(APIView):
+class AdminProfileList(APIView):
     permission_classes = (IsAdminOrReadOnly,)
     def get(self,request,format=None):
         all_profiles = HoodadminProfile.objects.all()
@@ -26,4 +26,29 @@ class ProfileList(APIView):
         return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-   
+    
+# class HoodList(APIView):
+#     def get(self, request, format=None):
+#         all_hood = Neighborhood.objects.all()
+#         serializers = NeighSerializer(all_hood, many=True)
+#         return Response(serializers.data)
+
+# class ResidentList(APIView):
+#     def get(self, request, format=None):
+#         all_resident = ResidentProfile.objects.all()
+#         serializers = ResidentSerializer(all_resident, many=True)
+#         return Response(serializers.data)
+
+# class BusinessList(APIView):
+#     def get(self, request, format=None):
+#         all_business = Business.objects.all()
+#         serializers = BusinessSerializer(all_business, many=True)
+#         return Response(serializers.data)
+
+
+# class UserViewSet(viewsets.ModelViewSet):
+#     """
+#     A viewset for viewing and editing user instances.
+#     """
+#     serializer_class = UserSignupSerializer
+#     queryset = User.objects.all()

@@ -14,7 +14,7 @@ class HoodSerializer(serializers.ModelSerializer):
 
 class ResidentsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Resident
+        model = ResidentProfile
         fields = ('user', 'name','bio', 'profile_pic','hoodname','contact')
 
 class BusinessSerializer(serializers.ModelSerializer):
