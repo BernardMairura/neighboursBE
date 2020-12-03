@@ -32,7 +32,7 @@ class HoodadminProfile(models.Model):
 
 
 
-class NeighborProfile(models.Model):
+class ResidentProfile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE, null=True, related_name='neighbor_profile')
     location=models.CharField(max_length=30,blank=True)
     bio =HTMLField(max_length=100, blank=True)
