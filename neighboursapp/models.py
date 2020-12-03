@@ -4,7 +4,9 @@ from django.urls import reverse
 from django.db.models import CharField
 from cloudinary.models import CloudinaryField
 from tinymce.models import HTMLField
-from django.utils.translation import gettext_lazy as _
+# from django.utils.translation import gettext_lazy as _
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 
 
@@ -14,23 +16,14 @@ from django.utils.translation import gettext_lazy as _
 
 
 
-class NeighborProfile(models.Model):
-    user=models.OneToOneField(User,on_delete=models.CASCADE, null=True, related_name='neighbor_profile')
-    location=models.CharField(max_length=30,blank=True)
-    bio =HTMLField(max_length=100, blank=True)
-    prof_picture= CloudinaryField('image')
-    contact = models.CharField(max_length=15, blank=True)
-    hoodname = models.ForeignKey("Neighborhood", related_name='home', null=True)
-
-
 
 class HoodadminProfile(models.Model):
-    admin = models.ForeignKey(User, related_name='hood_administrator')
+    admin = models.ForeignKey(User,on_delete=models.CASCADE, related_name='hood_administrator')
     bio = HTMLField(max_length=100, blank=True)
     prof_picture= CloudinaryField('image')
 
-     def __str__(self):
-        return f'{self.user.username} HoodadminProfile('
+    def __str__(self):
+        return f'{self.user.username} HoodadminProfile'
 
     class Meta:
         db_table = 'adminprof'
@@ -39,17 +32,13 @@ class HoodadminProfile(models.Model):
 
 
 
-    @receiver(post_save, sender=User)
-    def create_user_profile(sender, instance, created, **kwargs):
-        if created:
-            Profile.objects.create(user=instance)
-
-    @receiver(post_save, sender=User)
-    def save_user_profile(sender, instance, **kwargs):
-        instance.profile.save()
-
-    def __str__(self):
-        return self.user.username
+class NeighborProfile(models.Model):
+    user=models.OneToOneField(User,on_delete=models.CASCADE, null=True, related_name='neighbor_profile')
+    location=models.CharField(max_length=30,blank=True)
+    bio =HTMLField(max_length=100, blank=True)
+    prof_picture= CloudinaryField('image')
+    contact = models.CharField(max_length=15, blank=True)
+    hoodname = models.ForeignKey("Neighborhood", on_delete=models.CASCADE,related_name='home', null=True)
 
 
 
@@ -87,7 +76,7 @@ class Business(models.Model):
     name = models.CharField(max_length=120)
     email = models.EmailField(max_length=254)
     body = HTMLField(blank=True)
-    neighbourhood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, related_name='business')
+    neighborhood = models.ForeignKey("Neighborhood", on_delete=models.CASCADE, related_name='business')
     location = models.CharField(max_length=60)
 
     def __str__(self):

@@ -40,6 +40,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'sendgrid',
+    'tinymce',
     'rest_framework.authtoken',
     'rest_framework',
     'cloudinary',
