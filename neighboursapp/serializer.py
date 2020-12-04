@@ -5,7 +5,7 @@ from .models import *
 class AdminSerializer(serializers.ModelSerializer):
     class Meta:
         model = HoodadminProfile
-        fields = ('admin', 'prof_picture', 'bio')
+        fields = ('user','full_name','email', 'prof_picture', 'bio')
 
 class HoodSerializer(serializers.ModelSerializer):
     class Meta:
