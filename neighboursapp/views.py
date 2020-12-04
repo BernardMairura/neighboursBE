@@ -41,11 +41,11 @@ class ResidentList(APIView):
         serializers = ResidentSerializer(all_resident, many=True)
         return Response(serializers.data)
 
-# class BusinessList(APIView):
-#     def get(self, request, format=None):
-#         all_business = Business.objects.all()
-#         serializers = BusinessSerializer(all_business, many=True)
-#         return Response(serializers.data)
+class BusinessList(APIView):
+    def get(self, request, format=None):
+        all_business = Business.objects.all()
+        serializers = BusinessSerializer(all_business, many=True)
+        return Response(serializers.data)
 
 
 class UserViewSet(viewsets.ModelViewSet):
