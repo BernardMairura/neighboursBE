@@ -5,16 +5,16 @@ from .models import *
 class AdminSerializer(serializers.ModelSerializer):
     class Meta:
         model = HoodadminProfile
-        fields = ('admin', 'prof_picture', 'bio')
+        fields = ('user','full_name','email', 'prof_picture', 'bio')
 
 class HoodSerializer(serializers.ModelSerializer):
     class Meta:
-        model = NeighbourHood
+        model = Neighborhood
         fields = ('name', 'location', 'admin','hoodphoto','body','residents','emergency_contact')
 
-class ResidentsSerializer(serializers.ModelSerializer):
+class ResidentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Resident
+        model = ResidentProfile
         fields = ('user', 'name','bio', 'profile_pic','hoodname','contact')
 
 class BusinessSerializer(serializers.ModelSerializer):

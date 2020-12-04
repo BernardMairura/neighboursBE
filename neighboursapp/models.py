@@ -18,15 +18,17 @@ from django.db.models.signals import post_save
 
 
 class HoodadminProfile(models.Model):
-    admin = models.ForeignKey(User,on_delete=models.CASCADE, related_name='hood_administrator')
+    user = models.ForeignKey(User,on_delete=models.CASCADE, related_name='hood_administrator')
+    full_name = models.CharField(max_length=50,null=True,blank=True)
+    email = models.EmailField(max_length=254,null=True)
     bio = HTMLField(max_length=100, blank=True)
-    prof_picture= CloudinaryField('image')
+    prof_picture= CloudinaryField('image',blank=True,null=True)
 
     def __str__(self):
         return f'{self.user.username} HoodadminProfile'
 
     class Meta:
-        db_table = 'adminprof'
+        db_table = 'hoodadminProf'
  
    
 
@@ -34,6 +36,8 @@ class HoodadminProfile(models.Model):
 
 class ResidentProfile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE, null=True, related_name='neighbor_profile')
+    full_name = models.CharField(max_length=50,null=True,blank=True)
+    email = models.EmailField(max_length=254,null=True)
     location=models.CharField(max_length=30,blank=True)
     bio =HTMLField(max_length=100, blank=True)
     prof_picture= CloudinaryField('image')
@@ -43,7 +47,7 @@ class ResidentProfile(models.Model):
 
 
 class Neighborhood(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50,null=True,blank=True)
     location = models.CharField(max_length=60)
     admin = models.ForeignKey("HoodadminProfile", on_delete=models.CASCADE, related_name='neighborhood')
     hoodphoto = CloudinaryField('image')
