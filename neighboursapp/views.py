@@ -29,11 +29,11 @@ class AdminProfileList(APIView):
 
 
     
-# class HoodList(APIView):
-#     def get(self, request, format=None):
-#         all_hood = Neighborhood.objects.all()
-#         serializers = NeighSerializer(all_hood, many=True)
-#         return Response(serializers.data)
+class HoodList(APIView):
+    def get(self, request, format=None):
+        all_hood = Neighborhood.objects.all()
+        serializers = HoodSerializer(all_hood, many=True)
+        return Response(serializers.data)
 
 # class ResidentList(APIView):
 #     def get(self, request, format=None):
