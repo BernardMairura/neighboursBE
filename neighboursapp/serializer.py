@@ -12,7 +12,7 @@ class HoodSerializer(serializers.ModelSerializer):
         model = Neighborhood
         fields = ('name', 'location', 'admin','hoodphoto','body','residents','emergency_contact')
 
-class ResidentsSerializer(serializers.ModelSerializer):
+class ResidentSerializer(serializers.ModelSerializer):
     class Meta:
         model = ResidentProfile
         fields = ('user', 'name','bio', 'profile_pic','hoodname','contact')

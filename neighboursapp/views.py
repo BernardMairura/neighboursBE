@@ -35,11 +35,11 @@ class HoodList(APIView):
         serializers = HoodSerializer(all_hood, many=True)
         return Response(serializers.data)
 
-# class ResidentList(APIView):
-#     def get(self, request, format=None):
-#         all_resident = ResidentProfile.objects.all()
-#         serializers = ResidentSerializer(all_resident, many=True)
-#         return Response(serializers.data)
+class ResidentList(APIView):
+    def get(self, request, format=None):
+        all_resident = ResidentProfile.objects.all()
+        serializers = ResidentSerializer(all_resident, many=True)
+        return Response(serializers.data)
 
 # class BusinessList(APIView):
 #     def get(self, request, format=None):
